@@ -35,6 +35,7 @@ AssembledState Assembler::assemble(uint64_t* data_s, ssize_t data_size, uint8_t*
                     self._iflags |= IFLAGS_DEBUG;
                     break;
                 }
+                default: break;
             }
         }
     }

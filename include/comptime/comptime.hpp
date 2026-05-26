@@ -36,6 +36,7 @@ namespace z4 {
     struct ParseResult {
         struct {
             uint64_t data;
+            uint64_t second_data;
             AssembleCodes code;
             bool empty: 1;
         } note;
