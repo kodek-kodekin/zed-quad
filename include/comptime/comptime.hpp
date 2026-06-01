@@ -1,31 +1,23 @@
 #pragma once
 
 #include <cstdint>
+#include <general.hpp>
 #include <comptime/comptime_tools.hpp>
 
 namespace z4 {
-    #define DATA_SZ (255 + 255 + 40)
-    #define ZED4_MAGIC 0x5A656434
-    #define SEPAR_START (0)
-    #define RTPREDICTOR_START (SEPAR_START + 255)
-    #define FNS_START (RTPREDICTOR_START + 40)
-
     #pragma pack(push, 1)
     struct AssembledState {
-        struct {
-            uint32_t magic;
-            uint16_t code_start;
-            uint64_t code_size;
-            uint16_t separ_start;
-            uint16_t rtpredictor_start;
-            uint16_t fns_start;
-        } header;
-        uint64_t data[DATA_SZ];
+        uint32_t magic;
+        uint16_t code_start;
+        vm_slot separ[100];
+        vm_slot rtpredictor[100];
+        vm_slot fns[40];
     }; //struct AssembledState
     #pragma pack(pop)
     
     enum class AssembleCodes : uint8_t {
-        FlagDebug = 0
+        FlagDebug = 0,
+        ValueWrite = 1,
     };
     
     enum class ParseError : uint8_t {
