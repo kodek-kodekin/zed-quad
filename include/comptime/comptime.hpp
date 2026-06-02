@@ -5,16 +5,6 @@
 #include <comptime/comptime_tools.hpp>
 
 namespace z4 {
-    #pragma pack(push, 1)
-    struct AssembledState {
-        uint32_t magic;
-        uint16_t code_start;
-        vm_slot separ[100];
-        vm_slot rtpredictor[100];
-        vm_slot fns[40];
-    }; //struct AssembledState
-    #pragma pack(pop)
-    
     enum class AssembleCodes : uint8_t {
         FlagDebug = 0,
         ValueWrite = 1,

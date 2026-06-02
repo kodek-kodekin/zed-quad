@@ -17,15 +17,20 @@
 namespace z4 {
     
     struct VContext {
-        z4::vm_slot stack[STACK_SIZE];
-        z4::vm_slot heap[HEAP_SIZE];
+        vm_slot stack[STACK_SIZE];
+        vm_slot heap[HEAP_SIZE];
         
         uint8_t* btc_start;
+        z4::AssembledState* state;
         
         #if defined(Z4_BERSERK)
         //TODO: добавить ватчдог
         uint8_t id;
         #endif
+        
+        VContext(uint8_t* file, uint64_t size);
+        
+        bool is_valid : 1;
     };
     
     class VMachine {
