@@ -11,6 +11,15 @@ ParseResult Assembler::parse_str(String& str) {
     if(first_word == "#debug") {
         res.note.op = AssembleCodes::FlagDebug;
         res.note.empty = false;
+    } else if (first_word == "fn") {
+        res.note.op = AssembleCodes::FlagDebug;
+        res.note.empty = false;
+    } else if (first_word == "let") {
+        res.note.op = AssembleCodes::FlagDebug;
+        res.note.empty = false;
+    } else if (first_word == "struct") {
+        res.note.op = AssembleCodes::FlagDebug;
+        res.note.empty = false;
     }
 }
 
