@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <general.hpp>
 #include <comptime/comptime_tools.hpp>
+#include <comptime/symtabs.hpp
 
 namespace z4 {
     enum class AssembleCodes : uint8_t {
@@ -30,17 +31,20 @@ namespace z4 {
     
     class Assembler {
     private:
-        AssembledState _asm_state;
         uint8_t _flags;
         
-        ParseResult parse_str(String& str);
-        Vec<String> _text;
+        uint8_t _fn_counter;
+        
+        z4::ParseResult parse_str(String& str);
+        
+        //symtables
+        Vec<z4::FuncEntry> _funcs;
     public:
-        Assembler(flags) : _flags(flags), _iflags(0), _asm_state{}, _bytecode(20) {}
+        Assembler(flags) : _flags(flags), _fn_counter(0) {}
         
         Assembler(const Assembler& other) = delete;
         Assembler& operator=(const Assembler& other) = delete;
         
-        AssembledState assemble(uint64_t* data_s, uint8_t* code_s, Vec<String>& strs);
+        z4::AssembledState assemble(uint64_t* data_s, uint8_t* code_s, Vec<String>& strs);
     }; //class Assembler
 }

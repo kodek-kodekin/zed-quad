@@ -106,6 +106,13 @@ namespace StrUtils {
         if(*runner != wanted) return nullptr;
         return runner;
     }
+    
+    inline char* strstag(const char* src, char sym) {
+        char* runner = src;
+        while(*runner == sym) ++runner;
+        
+        return runner;
+    }
 };
 
 template<typename T>
@@ -192,6 +199,11 @@ public:
     size_t get_len() const { return _len; }
     char* get_raw() const { return _chars; }
     
+    bool is_valid() const {
+        if(_chars == nullptr) return false;
+        return true;
+    }
+    
     String& operator=(const String& other) = delete;
     
     bool operator==(const char* other) const {
@@ -225,5 +237,26 @@ public:
     
     bool match(String& other) {
         return StrUtils::strncmp(_chars, other.get_raw(), other.get_len())
+    }
+    
+    String stage_up(char sym) {
+        return String(StrUtils::strstag(_chars, sym))
+    }
+    
+    String stage_void() {
+        char* runner = StrUtils::strstag(_chars, '\t');
+        char* runner2 = StrUtils::strstag(runner, ' ');
+        
+        return String(runner2);
+    }
+    
+    String jump(char wanted, bool above) {
+        if(!above) {
+            String str(StrUtils::strchr(_chars, wanted));
+        } else {
+            String str(StrUtils::strchr(_chars, wanted));
+            str.stage_up(wanted);
+        }
+        return str;
     }
 };
