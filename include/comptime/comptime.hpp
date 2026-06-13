@@ -34,13 +34,15 @@ namespace z4 {
         uint8_t _flags;
         
         uint8_t _fn_counter;
+        uint8_t _var_counter;
         
         z4::ParseResult parse_str(String& str);
         
         //symtables
         Vec<z4::FuncEntry> _funcs;
+        Vec<z4::VarEntry> _vars;
     public:
-        Assembler(flags) : _flags(flags), _fn_counter(0) {}
+        Assembler(flags) : _flags(flags), _fn_counter(0), _var_counter(0) {}
         
         Assembler(const Assembler& other) = delete;
         Assembler& operator=(const Assembler& other) = delete;

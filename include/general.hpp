@@ -39,6 +39,7 @@ namespace z4 {
         Load,
         LoadExt,
         LoadStruct,
+        Copy,
     };
     
     #define ZED4_MAGIC 0x5A656434

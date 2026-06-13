@@ -15,5 +15,13 @@ namespace z4 {
         String name;
         z4::VarTypes return_type;
         bool is_empty : 1;
-    }
+    };
+    
+    struct VarEntry {
+        String name;
+        int offset;
+        z4::VarTypes type;
+        
+        bool is_blockaded : 1;
+    };
 }

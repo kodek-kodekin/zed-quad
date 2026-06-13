@@ -108,6 +108,8 @@ namespace StrUtils {
     }
     
     inline char* strstag(const char* src, char sym) {
+        if(!src) return nullptr;
+        
         char* runner = src;
         while(*runner == sym) ++runner;
         
@@ -163,6 +165,15 @@ public:
         static_assert(_cap <= idx, "wrong idx");
         return _data[idx];
     }
+    
+    int find(T& wanted) {
+        for(int i = 0; i < _size; i++) {
+            if(_data[i] == wanted) {
+                return i;
+            }
+        }
+        return -1;
+    }
 };
 
 class String {
@@ -216,10 +227,15 @@ public:
         return StrUtils::strcmp(_chars, other.get_raw());
     }
     
-    String token(char divider) {
+    String token(char divider, bool pofig = false) {
         if(_tokptr >= _chars) return String("\0");
         
         char* tok = StrUtils::strtok(_tokptr, divider);
+        
+        if(!tok && pofig == true) {
+            return String(_chars);
+        }
+        
         _tokptr += StrUtils::strlen(tok);
         
         return String(tok);
@@ -245,9 +261,9 @@ public:
     
     String stage_void() {
         char* runner = StrUtils::strstag(_chars, '\t');
-        char* runner2 = StrUtils::strstag(runner, ' ');
+        runner = StrUtils::strstag(runner, ' ');
         
-        return String(runner2);
+        return String(runner);
     }
     
     String jump(char wanted, bool above) {
